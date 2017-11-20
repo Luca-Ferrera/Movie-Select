@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MovieSelect: send feedback</title>
+  <meta name="author" content="Marco,Riccardo,Luca">
+  <link rel=stylesheet href="progetto01.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid Sans">
+  <script type="text/javascript" language="javascript" src="progetto01.js"></script>
+</head>
+<body>
+  <a class="logo" href=".\progetto01.html"><img src=".\sfondi\logo.png"></a></div>
+  <div class="bordered">
+    <H1>Invia un feedback</H1>
+    <div class="desc1">Compila la seguente form se vuoi contribuire a migliorare il sito</div>
+  </div>
+      <form name="modfeed" action="" method="post" onSubmit="return checkForm();">
+        <table name="tablefeed" class="table1">
+            <th class="t1head">Nome</th>
+            <td class="t1data"><input type="text" name="nome" maxlength="40" size=50 placeholder="Inserisci qui il nome" pattern="[a-zA-Z]*" required></td>
+          <tr>
+            <th class="t1head">Cognome</th>
+            <td class="t1data"><input type="text" name="cognome" maxlength="40" size=50 placeholder="Inserisci qui il cognome" pattern="[a-zA-Z]*" required></td>
+            <tr>
+              <th class="t1head">E-mail</th>
+              <td class="t1data"><input type="email" name="email" maxlength="40" size=50 placeholder="Inserisci qui l'e-mail" required<td>
+            <tr>
+              <th class="t1head">Valutazione</th>
+              <td class="t1data"><input type="text" name="valutazione" maxlength="40" size=50 list="listavalutazione" placeholder="Inserisci una valutazione" required>
+                <datalist id="listavalutazione">
+                  <option value="utile">
+                  <option value="inutile">
+                  <option value="ottimo">
+                  <option value="non aggiornato">
+                  <option value="da migliorare">
+                </datalist>
+              </td>
+            <tr>
+              <th class="t1head">Segnala</th>
+              <td class="t1data"> Problema<input type="checkbox" name="chec">Commento<input type="checkbox" name="chec2">
+                </td>
+            <tr>
+              <th class="t1head">Sintesi</th>
+              <td class="t1data"><input type=text id="sintesi" name="sintesi" maxlength="40" size=50  placeholder="Inserire una breve sintesi"></td>
+            <tr>
+              <th class="t1head">Descrizione</th>
+              <td class="t1data"><textarea name="areacommento" cols="40" rows="5" placeholder="Scrivere qui la decrizione" wrap="physical"></textarea>
+      </table>
+      <div class="desc1"><input class="buttons" type="submit" name="submit" value="Invia">
+            <input class="buttons" type="reset" name="reset" value="Reset">
+        </div>
+      </div>
+    </form>
+</body>
+</html>
