@@ -24,7 +24,7 @@ H1 {
 .bordered{
       margin: auto;
       background-color: rgb(139,26,26);
-      width: 50%;
+      width: 100%;
       border: 1px solid rgb(47,79,79);
       border-radius: 3em;
       padding-bottom: 50px;
