@@ -8,7 +8,7 @@ H1 {
     color:white;
     font-family:'Droid Sans', serif;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
     }
 
@@ -17,14 +17,14 @@ H1 {
         color:white;
         font-size: 20px;
         text-align: center;
-        font-weight: bold;
+        font-weight: lighter;
       }
 
 /* Attributi del testo iniziale */
 .bordered{
       margin: auto;
       background-color: rgb(139,26,26);
-      width: 100%;
+      width: 50%;
       border: 1px solid rgb(47,79,79);
       border-radius: 3em;
       padding-bottom: 50px;
