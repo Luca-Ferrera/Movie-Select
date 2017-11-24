@@ -1,5 +1,5 @@
 body{
-    background-color: lightslategray;
+    background-color: white;
     margin: 0;
     padding: 0;   
 }
@@ -13,10 +13,11 @@ li {
     float: left;
 }
 .top{
-    height: 120px;
-    width:100%; 
+    height: 120px; 
     background-color:#21aabd;
     display: flex;
+    margin: auto;
+    width: 960px;
 }
 .top ul{
     display: flex;
@@ -36,6 +37,8 @@ li {
 }
 .middle {
     padding: 16px;
+    margin: auto;
+    width: 960px;
 }
 .film_icon li {
     padding: 16px;
