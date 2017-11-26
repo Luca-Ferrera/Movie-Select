@@ -8,10 +8,11 @@
     <link rel="stylesheet" type="text/css" href="homepage.css">
     <link rel="icon" href="./images/iconap.ico">
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript" language="javascript" src="..\DB.js"></script>
 </head>
 
 
-<body>
+<body onload="createDB()">
     <center><a class="logo" href=".\Homepage.html"><img src=".\images\logo1.png"></a></center>
 <div id="container">
 
@@ -21,7 +22,7 @@
 
     <div id="nav">
         <a href="">Home</a>
-        <a href="#">Tutti i film</a>
+        <a href="..\Filmboard\filmboard.html">Tutti i film</a>
         <a href="#">Usciti di recente</a>
         <a href="#">Più visti</a>
         <div id="infoandfeed">

@@ -5,6 +5,7 @@
         <link rel=stylesheet href="filmboard.css" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid Sans">
         <script type="text/javascript" language="javascript" src="filmboard.js"></script>
+        <script type="text/javascript" language="javascript" src="..\DB.js"></script>
     </head>
     <body>
         <nav>
@@ -13,12 +14,12 @@
                 <h1>Scegli raggruppamento film</h1>
                 <ul class="list">
                     <li class="list__item">
-                        <input type="radio" class="radio-btn" name="choice" id="a-opt" />
-                        <label for="a-opt" class="label">Genere</label>
+                        <input type="radio" class="radio-btn" name="choice" id="inputGenere" />
+                        <label for="a-opt" class="label" onclick="selectGroup()" id="genere">Genere</label>
                     </li>
                     <li class="list__item">
-                        <input type="radio" class="radio-btn" name="choice" id="b-opt" />
-                        <label for="b-opt" class="label">Attore</label>
+                        <input type="radio" class="radio-btn" name="choice" id="inputAttore" />
+                        <label for="b-opt" class="label" onclick="selectGroup()" id="attore">Attore</label>
                     </li>
                 </ul>
             </div>
