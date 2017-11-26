@@ -2,7 +2,10 @@ var request, db, indiceAttore, indiceGenere, indiceTitolo;
 
 
 function createDB(){
-  request = indexedDB.open("filmografia",1);
+  request = window.indexedDB.open("filmografia",2);
+  request.onsuccess = function(event) { 
+    db = event.target.result;
+  }  
 
   request.onupgradeneeded = function(event) {
     // The database did not previously exist, so create object stores and indexes.
@@ -50,15 +53,5 @@ function createDB(){
 }
 
 function selectGroup(event){
-  var tx = db.transaction("film");
-  var os = tx.objectStore("film");
-  var generi = [];
-  os.forEach(element => {
-    generi.push(element.genere);
-  });
-  if(event.id === "genere"){
-  }
-  else if(event.id === "attore"){
-
-  }
+  
 }
