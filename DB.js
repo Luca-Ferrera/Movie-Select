@@ -1,5 +1,5 @@
 var request, db, indiceAttore, indiceGenere, indiceTitolo;
-var arrayGeneri;
+//window.generi contiene un array con tutti i generi;
 
 
 function createDB(){
@@ -57,9 +57,9 @@ function createCategorie(){
     var r = window.indexedDB.open("filmografia", 4);
     r.onsuccess = function(e){
       var db = r.result;  
-      generi = creaGeneri(db); //devo assegnarlo alla variabile generi
-      //console.log("Lista generi:");
-      //console.log(generi);   
+      creaGeneri(db); //devo assegnarlo alla variabile generi
+      console.log("Lista generi:");
+      console.log(generi);   
     }
     r.onerror = function(e){
       console.log("errore apertura DB");
@@ -76,14 +76,13 @@ function creaGeneri(db){
     //console.log(osReq.result);
     var film = osReq.result;
     film.forEach(el => {
-      generi.push(el.genere);
+      if(el.filter(e => e ==el.genere).length == 0)
+        generi.push(el.genere);
     });
-    //console.log(generi);
-    return generi;
+    console.log(generi);
+    window.generi = generi;
+    usaGeneri();
   }
-  //console.log("GENERI: ")
-  //console.log(generi);
-  return generi;
 }
 
 function selectGroup(item){
