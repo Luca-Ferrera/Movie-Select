@@ -1,4 +1,5 @@
 var request, db, indiceAttore, indiceGenere, indiceTitolo;
+var arrayGeneri;
 
 
 function createDB(){
@@ -51,7 +52,53 @@ function createDB(){
     console.log("Si è verificato un errore nell'apertura del DB");
   }
 }
+function createCategorie(){
+  var generi = [];
+    var r = window.indexedDB.open("filmografia", 4);
+    r.onsuccess = function(e){
+      var db = r.result;  
+      generi = creaGeneri(db); //devo assegnarlo alla variabile generi
+      //console.log("Lista generi:");
+      //console.log(generi);   
+    }
+    r.onerror = function(e){
+      console.log("errore apertura DB");
+    }
+}
 
-function selectGroup(event){
+function creaGeneri(db){
+  var generi = [];
+  var t = db.transaction("film","readonly");
+  var os = t.objectStore("film");
+  var osReq = os.getAll();
+  osReq.onsuccess = function G(e){
+    //console.log("film: ");
+    //console.log(osReq.result);
+    var film = osReq.result;
+    film.forEach(el => {
+      generi.push(el.genere);
+    });
+    //console.log(generi);
+    return generi;
+  }
+  //console.log("GENERI: ")
+  //console.log(generi);
+  return generi;
+}
+
+function selectGroup(item){
+  request = window.indexedDB.open("filmografia", 2);
+  request.onsuccess = function(e){
+    db = e.target.result;
+    if(item.id === "genere"){
+      console.log("genere");
+    }
+    else if(item.id== "attore"){
+
+  }
+  request.onerror = function(e){
+    console.log("Errore apertura DB");
+    }
+  }
   
 }

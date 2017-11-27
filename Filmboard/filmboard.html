@@ -7,7 +7,7 @@
         <script type="text/javascript" language="javascript" src="filmboard.js"></script>
         <script type="text/javascript" language="javascript" src="..\DB.js"></script>
     </head>
-    <body>
+    <body onload="createCategorie()">
         <nav>
             <center><a class="logo" href=".\proveVarie.html"><img src=".\Icons\logo1.png"></a></center>
             <div class="top" id="top-bar">
@@ -15,11 +15,11 @@
                 <ul class="list">
                     <li class="list__item">
                         <input type="radio" class="radio-btn" name="choice" id="inputGenere" />
-                        <label for="a-opt" class="label" onclick="selectGroup()" id="genere">Genere</label>
+                        <label for="a-opt" class="label" onclick="selectGroup(this)" id="genere">Genere</label>
                     </li>
                     <li class="list__item">
                         <input type="radio" class="radio-btn" name="choice" id="inputAttore" />
-                        <label for="b-opt" class="label" onclick="selectGroup()" id="attore">Attore</label>
+                        <label for="b-opt" class="label" onclick="selectGroup(this)" id="attore">Attore</label>
                     </li>
                 </ul>
             </div>
