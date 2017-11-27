@@ -1,5 +1,6 @@
 var request, db, indiceAttore, indiceGenere, indiceTitolo;
 //window.generi contiene un array con tutti i generi;
+//window.attori contiene un array con tutti gli attori;
 
 
 function createDB(){
@@ -52,6 +53,8 @@ function createDB(){
     console.log("Si è verificato un errore nell'apertura del DB");
   }
 }
+
+/* si avvia quando si carica filmboard.html*/
 function createCategorie(){
   var generi = [];
     var r = window.indexedDB.open("filmografia", 4);
@@ -59,7 +62,8 @@ function createCategorie(){
       var db = r.result;  
       creaGeneri(db); //devo assegnarlo alla variabile generi
       console.log("Lista generi:");
-      console.log(generi);   
+      console.log(generi);
+      creaAttori(db);
     }
     r.onerror = function(e){
       console.log("errore apertura DB");
@@ -76,12 +80,32 @@ function creaGeneri(db){
     //console.log(osReq.result);
     var film = osReq.result;
     film.forEach(el => {
-      if(el.filter(e => e ==el.genere).length == 0)
+      if(!generi.includes(el.genere))
         generi.push(el.genere);
     });
+    console.log("generi:");
     console.log(generi);
     window.generi = generi;
-    usaGeneri();
+    //usaGeneri();
+  }
+}
+function creaAttori(db){
+  var attori = [];
+  var t = db.transaction("film","readonly");
+  var os = t.objectStore("film");
+  var osReq = os.getAll();
+  osReq.onsuccess = function G(e){
+    var film = osReq.result;
+    film.forEach(el => {
+      el.attori.forEach(a => {
+        if(!attori.includes(a))
+        attori.push(a);
+      });      
+    });
+    console.log("Attori:");
+    console.log(attori);
+    window.attori = attori;
+    //usaAttori();
   }
 }
 
