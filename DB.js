@@ -1,6 +1,6 @@
 var request, db, indiceAttore, indiceGenere, indiceTitolo;
-//window.generi contiene un array con tutti i generi;
-//window.attori contiene un array con tutti gli attori;
+//window.generi contiene un dizionario key = genere, value = array film;
+//window.attori contiene un dizionario key = attore, value = array film;
 
 
 function createDB(){
@@ -57,40 +57,37 @@ function createDB(){
 /* si avvia quando si carica filmboard.html*/
 function createCategorie(){
   var generi = [];
-    var r = window.indexedDB.open("filmografia", 4);
+    var r = window.indexedDB.open("filmografia", 5);
     r.onsuccess = function(e){
       var db = r.result;  
-      creaGeneri(db); //devo assegnarlo alla variabile generi
-      console.log("Lista generi:");
-      console.log(generi);
+      creaGeneri(db); 
       creaAttori(db);
     }
     r.onerror = function(e){
       console.log("errore apertura DB");
+      console.log(e);
+      
     }
 }
 
 function creaGeneri(db){
-  var generi = [];
+  var generi = {};
   var t = db.transaction("film","readonly");
   var os = t.objectStore("film");
   var osReq = os.getAll();
-  osReq.onsuccess = function G(e){
-    //console.log("film: ");
-    //console.log(osReq.result);
+  osReq.onsuccess = function(e){
     var film = osReq.result;
     film.forEach(el => {
-      if(!generi.includes(el.genere))
-        generi.push(el.genere);
+      if(! (el.genere in generi)) generi[el.genere] = [];
+      generi[el.genere].push(el);  //bisogna vedere se ho più film dello stesso genere
     });
-    console.log("generi:");
-    console.log(generi);
     window.generi = generi;
+    console.log(window.generi);
     //usaGeneri();
   }
 }
 function creaAttori(db){
-  var attori = [];
+  var attori = {};
   var t = db.transaction("film","readonly");
   var os = t.objectStore("film");
   var osReq = os.getAll();
@@ -98,26 +95,28 @@ function creaAttori(db){
     var film = osReq.result;
     film.forEach(el => {
       el.attori.forEach(a => {
-        if(!attori.includes(a))
-        attori.push(a);
+        if (!(a in attori)) attori[a] = [];
+        attori[a].push(el)
+        //if(!attori.includes(a))
+        //attori.push(a);
       });      
     });
-    console.log("Attori:");
-    console.log(attori);
     window.attori = attori;
+    console.log(window.attori);
     //usaAttori();
   }
 }
 
 function selectGroup(item){
-  request = window.indexedDB.open("filmografia", 2);
+  console.log("scelta selezione");
+  request = window.indexedDB.open("filmografia",5);
   request.onsuccess = function(e){
     db = e.target.result;
     if(item.id === "genere"){
       console.log("genere");
     }
     else if(item.id== "attore"){
-
+      
   }
   request.onerror = function(e){
     console.log("Errore apertura DB");
