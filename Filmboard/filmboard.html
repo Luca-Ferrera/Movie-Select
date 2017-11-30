@@ -4,9 +4,10 @@
         <meta name="author" content="Marco,Riccardo,Luca">
         <link rel=stylesheet href="filmboard.css" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid Sans">
+        <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>    
         <script type="text/javascript" language="javascript" src="..\DB.js"></script>
     </head>
-    <body onload="createCategorie()">
+    <body onload="start()">
         <nav>
             <center><a class="logo" href=".\proveVarie.html"><img src=".\Icons\logo1.png"></a></center>
             <div class="top" id="top-bar">
@@ -14,54 +15,30 @@
                 <ul class="list">
                     <li class="list__item">
                         <input type="radio" class="radio-btn" name="choice" id="inputGenere" />
-                        <label for="a-opt" class="label" onclick="selectGroup(this)" id="genere">Genere</label>
+                        <label for="a-opt" class="label" id="genere">Genere</label>
                     </li>
                     <li class="list__item">
                         <input type="radio" class="radio-btn" name="choice" id="inputAttore" />
-                        <label for="b-opt" class="label" onclick="selectGroup(this)" id="attore">Attore</label>
+                        <label for="b-opt" class="label" id="attore">Attore</label>
                     </li>
                 </ul>
             </div>
         </nav>
-        <div class="middle">
-            <div class="group_name" id="first-group">
-                <h2 class="group_name" id="first-title">First-group</h2>
-                <div class="film_icon">
-                    <ul role="navigator">
-                        <li>
-                            <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
-                        </li>
-                        <li>
-                            <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="group_name" id="second-group">
-                <h2 class="group_name" id="seconde-title">Second-group</h2>
-                <div class="film_icon">
-                    <ul role="navigator">
-                        <li>
-                            <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
-                        </li>
-                        <li>
-                            <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="group_name" id="third-group">
-                <h2 class="group_name" id="third-title">Third-group</h2>
-                <div class="film_icon">
-                    <ul role="navigator">
-                        <li>
-                            <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
-                        </li>
-                        <li>
-                            <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="middle" id="middle">
+            <div id="contenitore">
+                <div class="group_name" id="first-group">
+                    <h2 class="group_name" id="first-title">First-group</h2>
+                    <div class="film_icon">
+                        <ul role="navigator">
+                            <li>
+                                <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
+                            </li>
+                            <li>
+                                <a href="..\Filmpage\filmpage.html"><img src=".\Icons\avatar.jpg"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>  
             </div>
         </div>
     </body>

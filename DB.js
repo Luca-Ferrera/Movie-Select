@@ -55,19 +55,41 @@ function createDB(){
 }
 
 /* si avvia quando si carica filmboard.html*/
-function createCategorie(){
-  var generi = [];
-    var r = window.indexedDB.open("filmografia", 5);
-    r.onsuccess = function(e){
-      var db = r.result;  
-      creaGeneri(db); 
-      creaAttori(db);
+function start(){
+  var r = window.indexedDB.open("filmografia", 5);
+  r.onsuccess = function(e){
+    var db = r.result;  
+    creaGeneri(db); 
+    creaAttori(db);
+    //console.log(window.generi);
+    //defaultFilmboard();    
+  }
+  r.onerror = function(e){
+    console.log("errore apertura DB");
+    console.log(e); 
+  }
+}
+/*genera la pagina di default di filmboard.html"*/
+function defaultFilmboard(){
+  console.log("default");
+  console.log(window.generi);
+  $("#contenitore").empty();
+  for(film in window.attori){
+    var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
+    var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
+    var c = b.after('<div class="film_icon"></div>');
+    var d = c.append('<ul></ul>');
+    d.css("list-style-type", "none");
+    for(var el in window.attori[film]){
+      var e = d.append('<li></li>');
+      e.css("float", "left");
+      e.css("padding","16px");
+      e.css("padding-left","2px");
+      e.css("padding-right","2px");
+      e.append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+      //e.append(window.attori[film][el].immagine);        
     }
-    r.onerror = function(e){
-      console.log("errore apertura DB");
-      console.log(e);
-      
-    }
+  }
 }
 
 function creaGeneri(db){
@@ -107,20 +129,43 @@ function creaAttori(db){
   }
 }
 
-function selectGroup(item){
-  console.log("scelta selezione");
-  request = window.indexedDB.open("filmografia",5);
-  request.onsuccess = function(e){
-    db = e.target.result;
-    if(item.id === "genere"){
-      console.log("genere");
+$(document).ready(function(){
+  $('#attore').click(function(){
+    $("#contenitore").empty();
+    for(film in window.attori){
+      var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
+      var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
+      var c = b.after('<div class="film_icon"></div>');
+      var d = c.append('<ul></ul>');
+      d.css("list-style-type", "none");
+      for(var el in window.attori[film]){
+        var e = d.append('<li></li>');
+        e.css("float", "left");
+        e.css("padding","16px");
+        e.css("padding-left","2px");
+        e.css("padding-right","2px");
+        e.append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+        //e.append(window.attori[film][el].immagine);        
+      }
     }
-    else if(item.id== "attore"){
-      
-  }
-  request.onerror = function(e){
-    console.log("Errore apertura DB");
+  });
+  $('#genere').click(function(){
+    $("#contenitore").empty();
+    for(film in window.generi){
+      var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
+      var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
+      var c = b.after('<div class="film_icon"></div>');
+      var d = c.append('<ul></ul>');
+      d.css("list-style-type", "none");
+      for(var el in window.generi[film]){
+        var e = d.append('<li></li>');
+        e.css("float", "left");
+        e.css("padding","16px");
+        e.css("padding-left","2px");
+        e.css("padding-right","2px");
+        e.append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+        //e.append(window.generi[film][el].immagine);        
+      }
     }
-  }
-  
-}
+  });
+});
