@@ -132,39 +132,29 @@ function creaAttori(db){
 $(document).ready(function(){
   $('#attore').click(function(){
     $("#contenitore").empty();
-    for(film in window.attori){
-      var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
-      var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
-      var c = b.after('<div class="film_icon"></div>');
-      var d = c.append('<ul></ul>');
-      d.css("list-style-type", "none");
-      for(var el in window.attori[film]){
-        var e = d.append('<li></li>');
-        e.css("float", "left");
-        e.css("padding","16px");
-        e.css("padding-left","2px");
-        e.css("padding-right","2px");
-        e.append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+    for(attore in window.attori){
+      $("#contenitore").append('<div class="group_name" id="'+ attore +'-group"></div>');
+      $("#"+attore+"-group").append('<h2 class="group_name" id="'+ attore +'-title">'+ attore + '</h2>');
+      $("#"+attore+"-title").after('<div class="film_icon" id="'+ attore +'-icon"></div>');
+      $("#"+attore+"-icon").append('<ul id="'+ attore +'-ul"></ul>');
+      for(var el in window.attori[attore]){
+        $("#"+attore+"-ul").append('<li id="'+ el + attore +'-li-item"></li>');
+        $("#"+el+attore+"-li-item").append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
         //e.append(window.attori[film][el].immagine);        
       }
     }
   });
   $('#genere').click(function(){
     $("#contenitore").empty();
-    for(film in window.generi){
-      var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
-      var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
-      var c = b.after('<div class="film_icon"></div>');
-      var d = c.append('<ul></ul>');
-      d.css("list-style-type", "none");
-      for(var el in window.generi[film]){
-        var e = d.append('<li></li>');
-        e.css("float", "left");
-        e.css("padding","16px");
-        e.css("padding-left","2px");
-        e.css("padding-right","2px");
-        e.append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
-        //e.append(window.generi[film][el].immagine);        
+    for(genere in window.generi){
+      $("#contenitore").append('<div class="group_name" id="'+ genere +'-group"></div>');
+      $("#"+genere+"-group").append('<h2 class="group_name" id="'+ genere +'-title">'+ genere + '</h2>');
+      $("#"+genere+"-title").after('<div class="film_icon" id="'+ genere +'-icon"></div>');
+      $("#"+genere+"-icon").append('<ul id="'+ genere +'-ul"></ul>');
+      for(var el in window.generi[genere]){
+        $("#"+genere+"-ul").append('<li id="'+ el + genere +'-li-item"></li>');
+        $("#"+el+genere+"-li-item").append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+        //e.append(window.attori[film][el].immagine);        
       }
     }
   });
