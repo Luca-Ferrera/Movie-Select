@@ -19,6 +19,7 @@ a:hover{color:#333;text-decoration:underline;}
         #nav            {width:960px;background:#666;color:#fff;}
             #nav a      {color:white; padding:15px 20px;display:inline-block; text-decoration:none; text-transform:uppercase;font-family:oswald;}
             #nav a:hover{background:#333;}  /*quando si passa sul testo si scurisce*/
+            
 
         /*** Slider ***/
         .slider-wrapper {width:100%;}
@@ -75,7 +76,7 @@ a:hover{color:#333;text-decoration:underline;}
         .film_icon li a{
             display: block;
         }
-        /*immagini ridimensionate tutte alla stessa altezza e larghezza*/
+        /*immagini lacandina ridimensionate tutte alla stessa altezza e larghezza*/
         .locandina{
             width:150px; height:212px;
         }
