@@ -75,8 +75,13 @@ a:hover{color:#333;text-decoration:underline;}
         .film_icon li a{
             display: block;
         }
+        /*immagini ridimensionate tutte alla stessa altezza e larghezza*/
+        .locandina{
+            width:150px; height:212px;
+        }
+
         /*effetto zoom sulle locandine*/
-        img:hover{width:160px; height:222px;}
+        .locandina img:hover{width:160px; height:222px;}
 
 
 
