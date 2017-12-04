@@ -75,6 +75,13 @@ nav{
 .film_icon li a{
     display: block;
 }
+/*immagini lacandina ridimensionate tutte alla stessa altezza e larghezza*/
+.locandina img{
+    width:175px; height:242px;
+}
+
+/*effetto zoom sulle locandine*/
+.locandina img:hover{width:185px; height:252px;}
 
 .list {
     -webkit-box-flex: 0;

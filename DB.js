@@ -81,7 +81,7 @@ function defaultFilmboard(){
     $("#"+genere+"-icon").append('<ul id="'+ genere +'-ul"></ul>');
     for(var el in window.generi[genere]){
       $("#"+genere+"-ul").append('<li id="'+ el + genere +'-li-item"></li>');
-      $("#"+el+genere+"-li-item").append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+      $("#"+el+genere+"-li-item").append('<a class= "locandina" href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
       //e.append(window.attori[film][el].immagine);        
     }
   }
@@ -134,7 +134,7 @@ $(document).ready(function(){
       $("#"+attore+"-icon").append('<ul id="'+ attore +'-ul"></ul>');
       for(var el in window.attori[attore]){
         $("#"+attore+"-ul").append('<li id="'+ el + attore +'-li-item"></li>');
-        $("#"+el+attore+"-li-item").append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+        $("#"+el+attore+"-li-item").append('<a class= "locandina" href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
         //e.append(window.attori[film][el].immagine);        
       }
     }
@@ -148,7 +148,7 @@ $(document).ready(function(){
       $("#"+genere+"-icon").append('<ul id="'+ genere +'-ul"></ul>');
       for(var el in window.generi[genere]){
         $("#"+genere+"-ul").append('<li id="'+ el + genere +'-li-item"></li>');
-        $("#"+el+genere+"-li-item").append('<a href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
+        $("#"+el+genere+"-li-item").append('<a class= "locandina" href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
         //e.append(window.attori[film][el].immagine);        
       }
     }
