@@ -1,7 +1,7 @@
 body{
     background-color: white;
-    margin: 0;  
-    padding: 0;   
+    margin: 0;
+    padding: 0;
     color: #fff;
 }
 h1{
@@ -23,7 +23,7 @@ nav{
 
 }
 .top{
-    height: 100px; 
+    height: 100px;
     background-color:rgb(139,26,26);
     display: flex;
     margin-left: auto;
@@ -49,13 +49,102 @@ nav{
     width: 160px;
     margin: auto;
 }
+
+.description {font-family: oswald;
+              font-size: 20px;
+              text-align: center;
+              padding: 50px;
+              color:#666;
+              }
+.description::first-letter{
+              font-size: 40px;
+              font-weight: bolder;
+}
+
+.hr{color:#666;
+    text-align: center;
+    width: 960px;
+}
+
+.halfhr{
+    color:#666;
+    width:450px;
+    float:left;
+}
+
 .middle {
     padding-top: 15px;
-    margin: auto;
     width: 960px;
+    margin: auto;
     color: black;
     margin-top: 200px;
 }
+
+.group_name{
+    width:500px;
+    display: inline-block;
+}
+
+#contenitore{
+  width: 500px;
+  float: left;
+  display: inline-block;
+}
+
+#filmdescr{
+  width: 450px;
+  height:auto;
+  overflow: hidden;
+  float: left;
+  display:inline-block;
+  margin-top:25px;
+  border: 2px solid black;
+}
+
+// attributi della searchbar
+#searchbar{
+  width: 450px;
+  height: 40px;
+}
+#sbarinput{
+  width: 360px;
+  height: 40px;
+  font-family: oswald;
+  font-size: 19;
+  /*display: none;*/
+}
+#searchbutton{
+  width: 80px;
+  height: 40px;
+  padding: 7px 12px;
+  /*display: none;*/
+  color: white;
+  background-color: rgb(139,26,26);
+  font-family: oswald;
+  font-size: 22;
+  text-align: center;
+  cursor:pointer;
+}
+#searchbutton:hover{
+  background-color: rgb(47,79,79);
+  box-shadow: 0px 0px 8px 3px rgb(0,0,0,0.3);
+}
+#barinfo{
+  font-family: oswald;
+  font-size: 19;
+  color:#666;
+}
+#barinfo::first-letter{
+              font-size: 25px;
+              font-weight: bolder;
+}
+//
+
+.descr_icon{
+  display:inline-block;
+  margin:auto;
+}
+
 .middle ul{
     list-style-type: none;
     margin: 0;
@@ -64,16 +153,14 @@ nav{
 }
 
 .film_icon li {
-    padding: 16px;
+    padding: 10px;
     padding-left: 2px;
     padding-right: 2px;
-    float: left;
+    display: inline-block;
+    cursor: pointer;
 }
 .film_icon li:first-of-type{
     padding-left: 0;
-}
-.film_icon li a{
-    display: block;
 }
 
 .list {
@@ -81,11 +168,11 @@ nav{
         -ms-flex: 0 20rem;
             flex: 0 20rem;
   }
-  
+
   .list__item {
     position: relative;
   }
-  
+
   .radio-btn {
     display: none;
   }
@@ -97,7 +184,7 @@ nav{
     border: 0.5rem solid black;
     background: rgb(139,26,26);
   }
-  
+
   .label {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -113,7 +200,7 @@ nav{
     -webkit-transition: all 0.25s linear;
     transition: all 0.25s linear;
   }
-  
+
   .label::before {
     display: block;
     height: 1.125rem;
@@ -125,4 +212,3 @@ nav{
     -webkit-transition: all 0.25s linear;
     transition: all 0.25s linear;
   }
-  
