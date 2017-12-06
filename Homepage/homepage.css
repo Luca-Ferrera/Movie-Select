@@ -20,29 +20,8 @@ a:hover{color:#333;text-decoration:underline;}
             #nav a      {color:white; padding:15px 20px;display:inline-block; text-decoration:none; text-transform:uppercase;font-family:oswald;}
             #nav a:hover{background:#333;}  /*quando si passa sul testo si scurisce*/
 
-
-        /*** Slider ***/
-        .slider-wrapper {width:100%;}
-
         /*** Contenuto evi ***/
         .item-evi       {width:190px;padding:20px;float:left;}
-
-        /*** Messaggio ***/
-        #mes-full       {width:920;padding:20px;clear:both;background: #e2e2e0;}
-            #mes-full p {font-family:oswald;text-transform:uppercase;font-weight:normal;font-size: 28px;}
-
-        /*** Contenuto ***/
-        #content        {width:620px;padding:20px;float:left;}
-            #content .articolo  {border-bottom:1px solid #eee;min-height:190px;padding:0px 0 10px 0;}
-            #content .articolo img{float:left;margin: 0 20px 0 0;}
-
-            #content .last      {border-bottom:none;}
-
-        /*** Sidebar ***/
-        #sidebar        {width:260px;padding:20px;float:left;}
-
-        /*** Footer ***/
-        #footer         {width:920px;padding:20px;clear:both;background: #666;color:#fff}
 
         /*** Descrizione ***/
         .description {font-family: oswald;
@@ -76,15 +55,3 @@ a:hover{color:#333;text-decoration:underline;}
         .film_icon li a{
             display: block;
         }
-        /*immagini lacandina ridimensionate tutte alla stessa altezza e larghezza*/
-        .locandina img{
-            width:175px; height:242px;
-        }
-
-        /*effetto zoom sulle locandine*/
-        .locandina img:hover{width:185px; height:252px;}
-
-
-
-/* Clear */
-.clear{width:100%;clear:both;height:1px;background:#eee;}

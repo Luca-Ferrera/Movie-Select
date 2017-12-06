@@ -1,156 +1,213 @@
-var request, db, indiceAttore, indiceGenere, indiceTitolo;
-//window.generi contiene un dizionario key = genere, value = array film;
-//window.attori contiene un dizionario key = attore, value = array film;
+var filmografia;
+var generi={};
+var actors={};
+// variabile per le ricerche
+var testo_ricerca="";
+// la pagina può avere valori : "Tutti", "Attori", "Generi"  che rappresentano il layout che si sta visualizzando;
+window.pagina="Tutti";
 
 
-function createDB(){
-  request = window.indexedDB.open("filmografia",2);
-  request.onsuccess = function(event) { 
-    db = event.target.result;
-  }  
-
-  request.onupgradeneeded = function(event) {
-    // The database did not previously exist, so create object stores and indexes.
-      db = event.target.result;
-      if(db.objectStoreNames.contains("film")) {
-        db.deleteObjectStore("film");
-      }
-      var os = db.createObjectStore('film', {keyPath:"titolo"});
-      var tx = event.target.transaction;
-      var store = tx.objectStore("film");
-      indiceTitolo = store.createIndex("by_titolo", "titolo", {unique: true});
-      indiceAttore = store.createIndex("by_attori", "attori");
-      indiceGenere = store.createIndex("by_genere","genere");
-    
-    //The following example populates the database using a transaction.
-      
-      store.put({titolo: "PrimoFilm",
-                  genere: "azione",
-                  regista: "Fred",
-                  attori: ["mario", "giuseppe"],
-                  description: "Film bellissimo"}); 
-
-      store.put({titolo: "SecondoFilm",
-                  genere: "avventura",
-                  regista: "Fred",
-                  attori: ["mario", "giuseppe"],
-                  description: "Film bellissimo"});
-
-      store.put({titolo: "TerzoFilm",
-                  genere: "Horror",
-                  regista: "Fred",
-                  attori: ["mario", "giuseppe"],
-                  description: "Film bellissimo"});            
-
-      tx.oncomplete = function() {
-      // All requests have succeeded and the transaction has committed.
-      };
-  };
-  request.onsuccess = function(event) {
-    db = request.result;
-  };
-  request.onerror = function(event){
-    console.log("Si è verificato un errore nell'apertura del DB");
-  }
+//Funzione eseguita al caricamento della pagina che recupera i dati dei film dal server (nel nostro caso da file di testo) tramite AJAX
+function carica(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = gestisciResponse;
+  xhttp.open("GET","filmlist.txt",true);
+  xhttp.send();
 }
 
-/* si avvia quando si carica filmboard.html*/
-function start(){
-  var r = window.indexedDB.open("filmografia", 5);
-  r.onsuccess = function(e){
-    var db = r.result;  
-    creaGeneri(db); 
-    creaAttori(db);
-    //console.log(window.generi);
-    //defaultFilmboard();    
+//Handler per la risposta dal server con i dati inerenti i film
+function gestisciResponse(evento){
+  if(evento.target.readyState == 4 && evento.target.status==200){
+    filmografia=JSON.parse(evento.target.responseText);
   }
-  r.onerror = function(e){
-    console.log("errore apertura DB");
-    console.log(e); 
+/*  else{
+    console.log("Si è verificato un errore nel reperire i dati inerenti ai film dal server");
   }
+*/
+  creaGeneri();
+  creaAttori();
+//  defaultFilmboard();
 }
+
+//Popolo l'oggetto generi, contenitore di tanti array "Nomegenere" in ciascuno dei quali sono salvati i film(oggetti film) di tale genere
+function creaGeneri(){
+    var i,j;
+    for (i=0; i<filmografia.length; i++){
+        var gens = filmografia[i].genere;
+        for (j=0; j<gens.length; j++){
+          if (!(gens[j] in generi))
+            generi[gens[j]]=[];
+          generi[gens[j]].push(filmografia[i]);
+        }
+    }
+    window.generi=generi;
+    console.log(generi);
+    console.log("end");
+}
+
+
+
+//Popolo l'oggetto attori, contenitore di tanti array "Nomeattore" in ciascuno dei quali sono salvati i film(oggetti film) in cui recita
+function creaAttori(){
+    var i,j;
+    for (i=0; i<filmografia.length; i++){
+        var atts = filmografia[i].attori;
+        for (j=0; j<atts.length; j++){
+          if(!(atts[j] in actors))
+            actors[atts[j]]=[];
+          actors[atts[j]].push(filmografia[i]);
+        }
+  }
+    window.actors=actors;
+    console.log(window.actors);
+    console.log("end");
+}
+
+
+
 /*genera la pagina di default di filmboard.html"*/
+/*
 function defaultFilmboard(){
   console.log("default");
   console.log(window.generi);
   $("#contenitore").empty();
-  for(genere in window.generi){
-    $("#contenitore").append('<div class="group_name" id="'+ genere +'-group"></div>');
-    $("#"+genere+"-group").append('<h2 class="group_name" id="'+ genere +'-title">'+ genere + '</h2>');
-    $("#"+genere+"-title").after('<div class="film_icon" id="'+ genere +'-icon"></div>');
-    $("#"+genere+"-icon").append('<ul id="'+ genere +'-ul"></ul>');
-    for(var el in window.generi[genere]){
-      $("#"+genere+"-ul").append('<li id="'+ el + genere +'-li-item"></li>');
-      $("#"+el+genere+"-li-item").append('<a class= "locandina" href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
-      //e.append(window.attori[film][el].immagine);        
+  for(film in window.attori){
+    var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
+    var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
+    var c = b.after('<div class="film_icon"></div>');
+    var d = c.append('<ul></ul>');
+    d.css("list-style-type", "none");
+    for(var el in window.attori[film]){
+      var e = d.append('<li></li>');
+      e.css("float", "left");
+      e.css("padding","16px");
+      e.css("padding-left","2px");
+      e.css("padding-right","2px");
+      e.append('<a href="..\\Filmpage\\filmpage.html"><img src='+window.attori[film].img+'></a>');
+      //e.append(window.attori[film][el].immagine);
     }
   }
 }
-
-function creaGeneri(db){
-  var generi = {};
-  var t = db.transaction("film","readonly");
-  var os = t.objectStore("film");
-  var osReq = os.getAll();
-  osReq.onsuccess = function(e){
-    var film = osReq.result;
-    film.forEach(el => {
-      if(! (el.genere in generi)) generi[el.genere] = [];
-      generi[el.genere].push(el);  //bisogna vedere se ho più film dello stesso genere
-    });
-    window.generi = generi;
-    console.log(window.generi);
-    //usaGeneri();
-  }
-}
-function creaAttori(db){
-  var attori = {};
-  var t = db.transaction("film","readonly");
-  var os = t.objectStore("film");
-  var osReq = os.getAll();
-  osReq.onsuccess = function G(e){
-    var film = osReq.result;
-    film.forEach(el => {
-      el.attori.forEach(a => {
-        if (!(a in attori)) attori[a] = [];
-        attori[a].push(el)
-        //if(!attori.includes(a))
-        //attori.push(a);
-      });      
-    });
-    window.attori = attori;
-    console.log(window.attori);
-    //usaAttori();
-  }
-}
-
+*/
 $(document).ready(function(){
-  $('#attore').click(function(){
-    $("#contenitore").empty();
-    for(attore in window.attori){
-      $("#contenitore").append('<div class="group_name" id="'+ attore +'-group"></div>');
-      $("#"+attore+"-group").append('<h2 class="group_name" id="'+ attore +'-title">'+ attore + '</h2>');
-      $("#"+attore+"-title").after('<div class="film_icon" id="'+ attore +'-icon"></div>');
-      $("#"+attore+"-icon").append('<ul id="'+ attore +'-ul"></ul>');
-      for(var el in window.attori[attore]){
-        $("#"+attore+"-ul").append('<li id="'+ el + attore +'-li-item"></li>');
-        $("#"+el+attore+"-li-item").append('<a class= "locandina" href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
-        //e.append(window.attori[film][el].immagine);        
+
+
+  //handler dell'evento click su attori, mostra i film di ciascun attore
+$('#attore').click(function(){
+    testo_ricerca="";
+    selezAttori();
+  });
+
+function selezAttori(){
+  window.pagina="Attori";
+  $("#contenitore").empty();
+  $("#contenitore").append("<div id='barinfo'>Ricerca un attore nella searchbar a lato</div><hr class='halfhr'></hr>");
+  // ordino gli attori per ordine alfabetico
+  var temp=[],i=0;
+  for(attore in window.actors){
+    temp[i]=attore;
+    i++;
+  }
+  temp.sort();
+  // creo dinamicamente gli elementi del DOM per mostrare gli attori e relativi film
+  for(i=0;i<temp.length;i++){
+    attore = temp[i];
+    // introduco la variabile attorerepl poichè ogni attore ha uno spazio all'interno del nome-cognome, il che non lo riprende
+    // un identificatore valido. Per risolvere sostituisco lo spazio con il trattino-basso
+    var attorerepl = attore.replace(/ /g,"_");
+    if (attore.replace(/ /g,"").toLowerCase().indexOf(testo_ricerca.toLowerCase())!=-1 || testo_ricerca == ""){
+      $("#contenitore").append('<div class="group_name" id="'+ attorerepl +'-group"></div>');
+      $("#"+attorerepl+"-group").append('<h2 class="group_name" id="'+ attorerepl +'-title">'+ attore+ '</h2>');
+      $("#"+attorerepl+"-title").after('<div class="film_icon" id="'+ attorerepl +'-icon"></div>');
+      $("#"+attorerepl+"-icon").append('<ul id="'+ attorerepl +'-ul"></ul>');
+      var el;
+      for(el in window.actors[attore]){
+        $("#"+attorerepl+"-ul").append('<li id="'+ el + attorerepl +'-li-item"></li>');
+        var titolo= window.actors[attore][el].titolo.replace(/ /g,"_");
+        $("#"+el+attorerepl+"-li-item").append('<img class="filmimg" name='+titolo+' src='+window.actors[attore][el].img+'>');
       }
     }
-  });
-  $('#genere').click(function(){
-    $("#contenitore").empty();
-    for(genere in window.generi){
+  }
+  mostraFilm();
+}
+
+
+// creo dinamicamente la descrizione del film che verrà mostrata al lato destro del layout
+function mostraFilm(){$(".filmimg").click(function (){
+        console.log(this);
+        var film;
+        var film_titolo=$(this).attr("name");
+        for (i in filmografia){
+          if (filmografia[i].titolo.replace(/ /g,"_")==film_titolo)
+            film=filmografia[i];
+        }
+
+        $("#filmdescr").empty();
+        $("#filmdescr").append('<img src='+film.img+'>');
+        $("#filmdescr").append('<h2 class="group_name" id="descr_title">'+film.titolo+'<h2>');
+        $("#filmdescr").append('<div id="descr_anno">'+film.anno+'</div>');
+        $("#filmdescr").append('<div id="descr_attori>">');
+        for (i in film.attori)
+          $("#filmdescr").append('-'+film.attori[i]);
+        $("#filmdescr").append('</div>');
+        $("#filmdescr").append('<div id="descr_genere">');
+        for (j in film.genere)
+          $("#filmdescr").append('-'+film.genere[j]);
+        $("#filmdescr").append('</div>');
+        $("#filmdescr").append('<div id="descr_descr">'+film.descrizione+'</div>');
+        $("#filmdescr").css("border-color","red");
+        /*$("#filmdescr").css("position","fixed");*/
+      });
+    }
+
+  //handler dell'evento click su generi, mostra i film di ciascun genere
+$('#genere').click(function(){
+  testo_ricerca="";
+  selezGeneri();
+});
+
+function selezGeneri(){
+  window.pagina="Generi";
+  $("#contenitore").empty();
+  $("#contenitore").append("<div id='barinfo'>Ricerca un genere nella searchbar a lato</div><hr class='halfhr'></hr>");
+  // ordino i generi per ordine alfabetico
+  var temp=[],i=0;
+  for(genere in window.generi){
+    temp[i]=genere;
+    i++;
+  }
+  temp.sort();
+  // creo dinamicamente gli elementi del DOM per mostrare i generi e relativi film
+  for(i=0; i<temp.length;i++){
+    genere= temp[i];
+    if (genere.toLowerCase().indexOf(testo_ricerca.toLowerCase())!=-1 || testo_ricerca == ""){
       $("#contenitore").append('<div class="group_name" id="'+ genere +'-group"></div>');
       $("#"+genere+"-group").append('<h2 class="group_name" id="'+ genere +'-title">'+ genere + '</h2>');
       $("#"+genere+"-title").after('<div class="film_icon" id="'+ genere +'-icon"></div>');
       $("#"+genere+"-icon").append('<ul id="'+ genere +'-ul"></ul>');
-      for(var el in window.generi[genere]){
+      var el;
+      for(el in window.generi[genere]){
         $("#"+genere+"-ul").append('<li id="'+ el + genere +'-li-item"></li>');
-        $("#"+el+genere+"-li-item").append('<a class= "locandina" href="..\\Filmpage\\filmpage.html"><img src=".\\Icons\\avatar.jpg"></a>');
-        //e.append(window.attori[film][el].immagine);        
+        var titolo= window.generi[genere][el].titolo.replace(/ /g,"_");
+        $("#"+el+genere+"-li-item").append('<img class="filmimg" name='+titolo+' src='+window.generi[genere][el].img+'>');
       }
     }
+  }
+  mostraFilm();
+}
+
+
+  $("#searchbutton").click(function(){
+    testo_ricerca = $("#sbarinput").val();
+    $("#sbarinput").val("");
+    // rimpiazzo il testo fornito in input con uno che soddisfi l'espressione regolare, ossia tolgo tutti i caratteri non validi
+    testo_ricerca=testo_ricerca.replace(/[^a-zA-Z]/g,"");
+    console.log(window.pagina);
+    if(window.pagina=="Attori")
+      selezAttori();
+    if(window.pagina=="Generi")
+      selezGeneri();
+    if(window.pagina=="Tutti"){}
   });
+
 });
