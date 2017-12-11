@@ -14,15 +14,15 @@ h2{
     font-weight:normal;
     padding-left: 1%;
 }
-nav{
+/*nav{
     top: 0;
     position: fixed;
     width: 100%;
     height: 200px;
     background-color: #fff;
+}*/
 
-}
-.top{
+/*.top{
     height: 100px;
     background-color:rgb(139,26,26);
     display: flex;
@@ -31,12 +31,37 @@ nav{
     justify-content: center;
     align-items: center;
     max-width: 960px;
+}*/
+#container{
+    top: 0;
+    position: fixed;
+    width: 100%;
+    background-color: white;
 }
+#top-bar{
+    width:920px;
+    padding:20px;
+    background: rgb(139,26,26);
+    margin-left: auto;
+    margin-right: auto;
+}
+#top-bar h1  {color:white;}
 
-.top ul{
+#nav{
+    width:960px;
+    background:#666;
+    color:#fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -16px;
+}
+#nav ul{
     display: flex;
     align-items: center;
     list-style-type: none;
+}
+#nav li:hover{
+    background:#333;
 }
 .logo{
     display: inline-block;
@@ -53,8 +78,13 @@ nav{
 .description {font-family: oswald;
               font-size: 20px;
               text-align: center;
-              padding: 50px;
+              padding: 10px;
+              padding-left: 0px;
+              padding-right: 0px;
               color:#666;
+              width: 960px;
+              margin-left: auto;
+              margin-right: auto;
               }
 .description::first-letter{
               font-size: 40px;
@@ -64,6 +94,8 @@ nav{
 .hr{color:#666;
     text-align: center;
     width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .halfhr{
@@ -77,7 +109,7 @@ nav{
     width: 960px;
     margin: auto;
     color: black;
-    margin-top: 200px;
+    margin-top: 430px;
 }
 
 .group_name{
@@ -101,10 +133,11 @@ nav{
   border: 2px solid black;
 }
 
-// attributi della searchbar
+/***attributi della searchbar***/
 #searchbar{
   width: 450px;
   height: 40px;
+  display: inline-block;
 }
 #sbarinput{
   width: 360px;
@@ -138,7 +171,7 @@ nav{
               font-size: 25px;
               font-weight: bolder;
 }
-//
+
 
 .descr_icon{
   display:inline-block;
@@ -150,6 +183,15 @@ nav{
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+/*immagini lacandina ridimensionate tutte alla stessa altezza e larghezza*/
+.filming img{
+    width:175px; 
+    height:242px;
+}
+.filming img:hover{
+    width:185px;
+    height:252px;
 }
 
 .film_icon li {
@@ -171,34 +213,29 @@ nav{
 
   .list__item {
     position: relative;
+    margin-right: 25px;
   }
 
   .radio-btn {
     display: none;
   }
-  .radio-btn:checked + .label {
+  /*.radio-btn:checked + .label {
     color: black;
-  }
-  .radio-btn:checked + .label::before {
-    margin-right: 5px; /*movimento label on click*/
+  */
+  /*.radio-btn:checked + .label::before {
+    margin-right: 5px; movimento label on click
     border: 0.5rem solid black;
     background: rgb(139,26,26);
-  }
+  }*/
 
   .label {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding: 5px;
+    align-items: center;
+    padding: 20px;
     color: #fff;
     font-size: 1.25rem;
     text-transform: uppercase;
     cursor: pointer;
-    -webkit-transition: all 0.25s linear;
-    transition: all 0.25s linear;
   }
 
   .label::before {
@@ -206,9 +243,5 @@ nav{
     height: 1.125rem;
     width: 1.125rem;
     margin-right: 0.625rem;
-    content: "";
-    border: 0.5rem solid #fff;
-    border-radius: 50%;
-    -webkit-transition: all 0.25s linear;
-    transition: all 0.25s linear;
+    
   }

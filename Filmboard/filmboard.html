@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Elenco film</title>
@@ -9,10 +10,12 @@
         <script type="text/javascript" language="javascript" src="..\DB.js"></script>
     </head>
     <body onload="carica()">
-        <nav>
-            <center><a class="logo" href="../Homepage/Homepage.html"><img src=".\Icons\logo1.png"></a></center>
+        <div id="container">
+            <center><a class="logo" href="../Homepage/Homepage.html"><img src=".\Icons\logo1.png"></a></center>       
             <div class="top" id="top-bar">
-                <h1>Scegli raggruppamento film</h1>
+                <center><h1>Scegli raggruppamento film</h1></center>
+            </div>
+            <div id="nav">
                 <ul class="list">
                     <li class="list__item">
                         <input type="radio" class="radio-btn" name="choice" id="inputGenere" />
@@ -24,15 +27,16 @@
                     </li>
                 </ul>
             </div>
-        </nav>
+            <div class="description">
+                Selezionare il raggruppamento per genere o per attore in alto a destra, e verranno visualizzati
+                i rispettivi film per ogni genere o di ogni attore.
+              </div>
+            <hr class="hr"></hr>
+        </div>
 
 
         <div class="middle" id="middle">
-          <div class="description">
-            Selezionare il raggruppamento per genere o per attore in alto a destra, e verranno visualizzati
-            i rispettivi film per ogni genere o di ogni attore.
-          </div>
-          <hr class="hr"></hr>
+          
             <!--contenitore per le copertine -->
             <div id="contenitore"></div>
             <!--contenitore per la search bar -->
