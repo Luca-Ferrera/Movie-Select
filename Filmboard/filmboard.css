@@ -53,6 +53,7 @@ h2{
     color:#fff;
     margin-left: auto;
     margin-right: auto;
+    margin-top: -16px;
 }
 #nav ul{
     display: flex;
@@ -212,6 +213,7 @@ h2{
 
   .list__item {
     position: relative;
+    margin-right: 25px;
   }
 
   .radio-btn {
