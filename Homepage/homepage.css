@@ -37,7 +37,7 @@ a:hover{
     color:#333;
     text-decoration:underline;
 }
->>>>>>> 8e84f7f70f27f6ef094e1066dcf20b2d8a303c26
+/*>>>>>>> 8e84f7f70f27f6ef094e1066dcf20b2d8a303c26*/
 
 
     #container      {width: 960px;margin: 0 auto;background:white}
@@ -51,11 +51,11 @@ a:hover{
             #nav a      {color:white; padding:15px 20px;display:inline-block; text-decoration:none; text-transform:uppercase;font-family:oswald;}
             #nav a:hover{background:#333;}  /*quando si passa sul testo si scurisce*/
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
            
         
 
-=======
+=======*/
 
         /*** Slider ***/
         /*.slider-wrapper {width:100%;}*/
@@ -68,19 +68,19 @@ a:hover{
             #mes-full p {font-family:oswald;text-transform:uppercase;font-weight:normal;font-size: 28px;}
         */
         /*** Contenuto ***/
-        /*#content        {width:620px;padding:20px;float:left;}
+        #content        {width:620px;padding:20px;float:left;}
             #content .articolo  {border-bottom:1px solid #eee;min-height:190px;padding:0px 0 10px 0;}
             #content .articolo img{float:left;margin: 0 20px 0 0;}
 
             #content .last      {border-bottom:none;}
-        */
->>>>>>> 8e84f7f70f27f6ef094e1066dcf20b2d8a303c26
+        
+/*>>>>>>> 8e84f7f70f27f6ef094e1066dcf20b2d8a303c26*/
         /*** Sidebar ***/
-        /*#sidebar        {width:260px;padding:20px;float:left;}
-        */
+        #sidebar        {width:260px;padding:20px;float:left;}
+        
         /*** Footer ***/
-        /*#footer         {width:920px;padding:20px;clear:both;background: #666;color:#fff}
-        */
+        #footer         {width:920px;padding:20px;clear:both;background: #666;color:#fff}
+        
         /*** Descrizione ***/
         .description {font-family: oswald;
                       font-size: 20px;
