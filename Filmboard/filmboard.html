@@ -12,8 +12,11 @@
     </head>
     <body onload="carica()">
         <div id="container">
-            <center><a class="logo" href="../Homepage/Homepage.html"><img src=".\Icons\logo1.png"></a></center>       
+            <div class="filmdescr" id="filmdescr"></div>
+            <center><a class="logo" href="../Homepage/Homepage.html"><img src=".\Icons\logo1.png"></a></center>  
+             <!-- <div class="filmdescr" id="filmdescr"></div> -->     
             <div class="top" id="top-bar">
+
                 <center><h1>Scegli raggruppamento film</h1></center>
             </div>
             <div id="nav">
@@ -37,15 +40,18 @@
                     i rispettivi film per ogni genere o di ogni attore.
             </div>
             <hr class="hr"></hr>
-            <!--contenitore per le copertine -->
-            <div id="contenitore"></div>
             <!--contenitore per la search bar -->
+            <br>
             <div id="searchbar">
               <input id="sbarinput" type="text" placeholder="Inserisci qui la stringa" maxlength="30">
               <span id="searchbutton">Ricerca</span>
             </div>
+            <!--contenitore per le copertine -->
+            <div id="contenitore"></div>
+            
+
             <!--contenitore per la descrizione del film -->
-            <div class="filmdescr" id="filmdescr"></div>
+           <!--  <div class="filmdescr" id="filmdescr"></div> -->
         </div>
     </body>
 </html>

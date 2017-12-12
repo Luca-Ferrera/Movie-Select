@@ -33,7 +33,7 @@ h2{
 }*/
 #container{
     top: 0;
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
     background-color: white;
 }
@@ -124,15 +124,17 @@ h2{
 }
 
 #filmdescr{
-    width: 450px;
+    width:600px;
     height:auto;
-    overflow: hidden;
+    overflow: auto;
     float: left;
-    display:inline-block;
-    margin-top:60px;
-    right: 300px;
-    border: 2px solid black;
+    /*display:inline-block;*/
+    margin-top:20px;
+    right: 30px;
+    /*border: 2px solid black;*/
     position: fixed;
+    color: black;
+    background: white;
     /*bisogna sistemare la posizione fissa*/
 }
 
@@ -140,7 +142,7 @@ h2{
 #searchbar{
   width: 450px;
   height: 40px;
-  display: inline-block;
+  /*display: inline-block;*/
 }
 #sbarinput{
   width: 360px;
@@ -229,6 +231,16 @@ h2{
     text-transform: uppercase;
     cursor: pointer;
 }
+/*label{
+    color:#21aabd;
+    text-decoration:none;
+}
+
+label:hover{
+    color:#333;
+    text-decoration:underline;
+}*/
+
 .label::before {
     display: block;
     height: 1.125rem;
