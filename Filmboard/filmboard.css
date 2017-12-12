@@ -184,9 +184,9 @@ h2{
     padding: 0;
     overflow: hidden;
 }
-/*immagini lacandina ridimensionate tutte alla stessa altezza e larghezza*/
+/*immagini locandina ridimensionate tutte alla stessa altezza e larghezza*/
 .filming img{
-    width:175px; 
+    widows: 220px;; 
     height:242px;
 }
 .filming img:hover{
