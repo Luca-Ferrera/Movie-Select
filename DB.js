@@ -101,7 +101,7 @@ $('#attore').click(function(){
 function selezAttori(){
   window.pagina="Attori";
   $("#contenitore").empty();
-  $("#contenitore").append("<div id='barinfo'>Ricerca un attore nella searchbar </div><hr class='halfhr'></hr>");
+  $("#contenitore").append("<div id='barinfo'>Ricerca un attore nella searchbar a lato</div><hr class='halfhr'></hr>");
   // ordino gli attori per ordine alfabetico
   var temp=[],i=0;
   for(attore in window.actors){
@@ -169,7 +169,7 @@ $('#genere').click(function(){
 function selezGeneri(){
   window.pagina="Generi";
   $("#contenitore").empty();
-  $("#contenitore").append("<div id='barinfo'>Ricerca un genere nella searchbar </div><hr class='halfhr'></hr>");
+  $("#contenitore").append("<div id='barinfo'>Ricerca un genere nella searchbar a lato</div><hr class='halfhr'></hr>");
   // ordino i generi per ordine alfabetico
   var temp=[],i=0;
   for(genere in window.generi){
