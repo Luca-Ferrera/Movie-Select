@@ -17,6 +17,7 @@ function carica(){
 
 //Handler per la risposta dal server con i dati inerenti i film
 function gestisciResponse(evento){
+  console.log(evento);
   if(evento.target.readyState == 4 && evento.target.status==200){
     filmografia=JSON.parse(evento.target.responseText);
     // ordino i film per titolo
@@ -33,11 +34,11 @@ function gestisciResponse(evento){
 }
 
 function selezFilm(){
+    var titolo,titolo_img;
     console.log("join selez film");
     window.pagina="Tutti";
     $("#contenitore").empty();
-    $("#contenitore").append("<div id='barinfo'>Ricerca un film per titolo nella searchbar a lato</div><hr class='halfhr'></hr>");
-    var titolo,titolo_img;
+    /*$("#contenitore").append("<div id='barinfo'>Ricerca un film per titolo nella searchbar a lato</div>"<hr class='halfhr'></hr>");*/
     $("#contenitore").append('<div class="group_name" id="tutti-group"></div>');
     $("#tutti-group").after('<div class="film_icon" id="tutti-icon"></div>');
     $("#tutti-icon").append('<ul id="tutti-ul"></ul>');
@@ -90,6 +91,8 @@ function mostraFilm(){$(".filmimg").click(function (){
         $("#filmdescr").append('<div id="descr_descr">'+film.descrizione+'</div>');
         $("#filmdescr").css("border-color","red");
         /*$("#filmdescr").css("position","fixed");*/
+        console.log("scroll");
+        window.scrollTo("#filmdescr");
       });
   }
 
@@ -138,8 +141,9 @@ $('#attore').click(function(){
 
 function selezAttori(){
   window.pagina="Attori";
+  $("#sbarinput").attr("placeholder","Ricerca per attore");
   $("#contenitore").empty();
-  $("#contenitore").append("<div id='barinfo'>Ricerca un attore nella searchbar a lato</div><hr class='halfhr'></hr>");
+  /*$("#contenitore").append("<div id='barinfo'>Ricerca un attore nella searchbar a lato</div><hr class='halfhr'></hr>");*/
   // ordino gli attori per ordine alfabetico
   var temp=[],i=0;
   for(attore in window.actors){
@@ -178,8 +182,9 @@ $('#genere').click(function(){
 
 function selezGeneri(){
   window.pagina="Generi";
+  $("#sbarinput").attr("placeholder","Ricerca per genere");
   $("#contenitore").empty();
-  $("#contenitore").append("<div id='barinfo'>Ricerca un genere nella searchbar a lato</div><hr class='halfhr'></hr>");
+  /*$("#contenitore").append("<div id='barinfo'>Ricerca un genere nella searchbar a lato</div><hr class='halfhr'></hr>");*/
   // ordino i generi per ordine alfabetico
   var temp=[],i=0;
   for(genere in window.generi){
