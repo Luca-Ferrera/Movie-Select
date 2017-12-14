@@ -19,6 +19,9 @@ function carica(){
 function gestisciResponse(evento){
   if(evento.target.readyState == 4 && evento.target.status==200){
     filmografia=JSON.parse(evento.target.responseText);
+    // ordino i film per titolo
+    filmografia.sort(sort_film);
+    console.log(filmografia);
   }
 /*  else{
     console.log("Si è verificato un errore nel reperire i dati inerenti ai film dal server");
@@ -26,8 +29,70 @@ function gestisciResponse(evento){
 */
   creaGeneri();
   creaAttori();
-//  defaultFilmboard();
+  selezFilm();
 }
+
+function selezFilm(){
+    console.log("join selez film");
+    window.pagina="Tutti";
+    $("#contenitore").empty();
+    $("#contenitore").append("<div id='barinfo'>Ricerca un film per titolo nella searchbar a lato</div><hr class='halfhr'></hr>");
+    var titolo,titolo_img;
+    $("#contenitore").append('<div class="group_name" id="tutti-group"></div>');
+    $("#tutti-group").after('<div class="film_icon" id="tutti-icon"></div>');
+    $("#tutti-icon").append('<ul id="tutti-ul"></ul>');
+    for (film in filmografia){
+      // salvo nella variabile titolo, il titolo nel formato che può avere un match con l'espressione regolare
+      // utilizzata per permettere la ricerca dalla searchbar, mentre titolo_img verrà utilizzato come attributo name, per identificare il film
+      // nella funzione mostraFilm, e quindi generare la descrizione del film dinamicamente (al click sull'immagine)
+      titolo = filmografia[film].titolo.replace(/[^a-zA-Z0-9]/g,"");
+      titolo_img = filmografia[film].titolo.replace(/ /g,"_");
+      if (titolo.toLowerCase().indexOf(testo_ricerca.toLowerCase())!=-1 || testo_ricerca==""){
+        console.log("Passa il controllo 1");
+        $("#tutti-ul").append('<li id="'+titolo+'-li-item"></li>');
+        $("#"+titolo+"-li-item").append('<img class="filmimg" name='+titolo_img+' src='+filmografia[film].img+'>');
+        console.log("debug");
+      }
+    }
+    mostraFilm();
+}
+
+function sort_film(film1,film2){
+  if (film1.titolo>film2.titolo) return 1;
+  if (film1.titolo<film2.titolo) return -1;
+  return 0;
+}
+
+function mostraFilm(){$(".filmimg").click(function (){
+        console.log(this);
+        var film;
+        var film_titolo=$(this).attr("name");
+        for (i in filmografia){
+          if (filmografia[i].titolo.replace(/ /g,"_")==film_titolo){
+            film=filmografia[i];
+            break;
+            console.log("filmfound");
+          }
+        }
+
+        $("#filmdescr").empty();
+        $("#filmdescr").append('<img src='+film.img+'>');
+        $("#filmdescr").append('<h2 class="group_name" id="descr_title">'+film.titolo+'<h2>');
+        $("#filmdescr").append('<div id="descr_anno">'+film.anno+'</div>');
+        $("#filmdescr").append('<div id="descr_attori>">');
+        for (i in film.attori)
+          $("#filmdescr").append('-'+film.attori[i]);
+        $("#filmdescr").append('</div>');
+        $("#filmdescr").append('<div id="descr_genere">');
+        for (j in film.genere)
+          $("#filmdescr").append('-'+film.genere[j]);
+        $("#filmdescr").append('</div>');
+        $("#filmdescr").append('<div id="descr_descr">'+film.descrizione+'</div>');
+        $("#filmdescr").css("border-color","red");
+        /*$("#filmdescr").css("position","fixed");*/
+      });
+  }
+
 
 //Popolo l'oggetto generi, contenitore di tanti array "Nomegenere" in ciascuno dei quali sono salvati i film(oggetti film) di tale genere
 function creaGeneri(){
@@ -63,34 +128,7 @@ function creaAttori(){
     console.log("end");
 }
 
-
-
-/*genera la pagina di default di filmboard.html"*/
-/*
-function defaultFilmboard(){
-  console.log("default");
-  console.log(window.generi);
-  $("#contenitore").empty();
-  for(film in window.attori){
-    var a = $("#contenitore").append('<div class="group_name" id="first-group"></div>');
-    var b = a.append('<h2 class="group_name" id="first-title">'+ film + '</h2>');
-    var c = b.after('<div class="film_icon"></div>');
-    var d = c.append('<ul></ul>');
-    d.css("list-style-type", "none");
-    for(var el in window.attori[film]){
-      var e = d.append('<li></li>');
-      e.css("float", "left");
-      e.css("padding","16px");
-      e.css("padding-left","2px");
-      e.css("padding-right","2px");
-      e.append('<a href="..\\Filmpage\\filmpage.html"><img src='+window.attori[film].img+'></a>');
-      //e.append(window.attori[film][el].immagine);
-    }
-  }
-}
-*/
 $(document).ready(function(){
-
 
   //handler dell'evento click su attori, mostra i film di ciascun attore
 $('#attore').click(function(){
@@ -112,7 +150,7 @@ function selezAttori(){
   // creo dinamicamente gli elementi del DOM per mostrare gli attori e relativi film
   for(i=0;i<temp.length;i++){
     attore = temp[i];
-    // introduco la variabile attorerepl poichè ogni attore ha uno spazio all'interno del nome-cognome, il che non lo riprende
+    // introduco la variabile attorerepl poichè ogni attore ha uno spazio all'interno del nome-cognome, il che non lo rende
     // un identificatore valido. Per risolvere sostituisco lo spazio con il trattino-basso
     var attorerepl = attore.replace(/ /g,"_");
     if (attore.replace(/ /g,"").toLowerCase().indexOf(testo_ricerca.toLowerCase())!=-1 || testo_ricerca == ""){
@@ -132,35 +170,7 @@ function selezAttori(){
 }
 
 
-// creo dinamicamente la descrizione del film che verrà mostrata al lato destro del layout
-function mostraFilm(){$(".filmimg").click(function (){
-        console.log(this);
-        var film;
-        var film_titolo=$(this).attr("name");
-        for (i in filmografia){
-          if (filmografia[i].titolo.replace(/ /g,"_")==film_titolo)
-            film=filmografia[i];
-        }
-
-        $("#filmdescr").empty();
-        $("#filmdescr").append('<img src='+film.img+'>');
-        $("#filmdescr").append('<h2 class="group_name" id="descr_title">'+film.titolo+'<h2>');
-        $("#filmdescr").append('<div id="descr_anno">'+film.anno+'</div>');
-        $("#filmdescr").append('<div id="descr_attori>">');
-        for (i in film.attori)
-          $("#filmdescr").append('-'+film.attori[i]);
-        $("#filmdescr").append('</div>');
-        $("#filmdescr").append('<div id="descr_genere">');
-        for (j in film.genere)
-          $("#filmdescr").append('-'+film.genere[j]);
-        $("#filmdescr").append('</div>');
-        $("#filmdescr").append('<div id="descr_descr">'+film.descrizione+'</div>');
-        $("#filmdescr").css("border-color","red");
-        /*$("#filmdescr").css("position","fixed");*/
-      });
-    }
-
-  //handler dell'evento click su generi, mostra i film di ciascun genere
+//handler dell'evento click su generi, mostra i film di ciascun genere
 $('#genere').click(function(){
   testo_ricerca="";
   selezGeneri();
@@ -197,17 +207,49 @@ function selezGeneri(){
 }
 
 
+$('#tutti').click(function(){
+  testo_ricerca="";
+  selezFilm();
+});
+
+
+/*function selezFilm(){
+    console.log("join selez film");
+    window.pagina="Tutti";
+    $("#contenitore").empty();
+    $("#contenitore").append("<div id='barinfo'>Ricerca un film per titolo nella searchbar a lato</div><hr class='halfhr'></hr>");
+    var titolo,titolo_img;
+    $("#contenitore").append('<div class="group_name" id="tutti-group"></div>');
+    $("#tutti-group").after('<div class="film_icon" id="tutti-icon"></div>');
+    $("#tutti-icon").append('<ul id="tutti-ul"></ul>');
+    for (film in filmografia){
+      // salvo nella variabile titolo, il titolo nel formato che può avere un match con l'espressione regolare
+      // utilizzata per permettere la ricerca dalla searchbar, mentre titolo_img verrà utilizzato come attributo name, per identificare il film
+      // nella funzione mostraFilm, e quindi generare la descrizione del film dinamicamente (al click sull'immagine)
+      titolo = filmografia[film].titolo.replace(/[^a-zA-Z0-9]/g,"");
+      titolo_img = filmografia[film].titolo.replace(/ /g,"_");
+      if (titolo.toLowerCase().indexOf(testo_ricerca.toLowerCase())!=-1 || testo_ricerca==""){
+        console.log("Passa il controllo 1");
+        $("#tutti-ul").append('<li id="'+titolo+'-li-item"></li>');
+        $("#"+titolo+"-li-item").append('<img class="filmimg" name='+titolo_img+' src='+filmografia[film].img+'>');
+        console.log("debug");
+      }
+    }
+    mostraFilm();
+}
+*/
   $("#searchbutton").click(function(){
     testo_ricerca = $("#sbarinput").val();
     $("#sbarinput").val("");
     // rimpiazzo il testo fornito in input con uno che soddisfi l'espressione regolare, ossia tolgo tutti i caratteri non validi
-    testo_ricerca=testo_ricerca.replace(/[^a-zA-Z]/g,"");
+    testo_ricerca=testo_ricerca.replace(/[^a-zA-Z0-9]/g,"");
     console.log(window.pagina);
     if(window.pagina=="Attori")
       selezAttori();
     if(window.pagina=="Generi")
       selezGeneri();
-    if(window.pagina=="Tutti"){}
+    if(window.pagina=="Tutti")
+      selezFilm();
   });
 
 });
