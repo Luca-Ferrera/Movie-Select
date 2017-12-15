@@ -5,14 +5,15 @@
   <meta name="author" content="Marco,Riccardo,Luca">
   <link rel=stylesheet href="progetto01.css" type="text/css">
   <link rel="icon" href="../Homepage/images/iconap.ico">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
   <script type="text/javascript" language="javascript" src="progetto01.js"></script>
 </head>
 <body>
-  <a class="logo" href="../Homepage/Homepage.html"><img src="../Homepage/images/logo1.png"></a></div>
+  <center><a class="logo" href="../Homepage/Homepage.html"><img src="../Homepage/images/logo1.png"></a></div></center>
   <div class="bordered">
     <H1>INVIA UN FEEDBACK</H1>
-    <div class="desc1">Compila la seguente form se vuoi contribuire a migliorare il sito</div>
   </div>
+  <center class="subtitle">Compila la seguente form se vuoi contribuire a migliorare il sito</center>
       <form name="modfeed" action="" method="post" onSubmit="return checkForm();">
         <table name="tablefeed" class="table1">
             <th class="t1head">Nome</th>
@@ -36,7 +37,7 @@
               </td>
             <tr>
               <th class="t1head">Segnala</th>
-              <td class="t1data"> Problema<input type="checkbox" name="chec">Commento<input type="checkbox" name="chec2">
+              <td class="t1data"> Problema<input type="checkbox" name="chec" onclick="checkBox()">Commento<input type="checkbox" name="chec2" onclick="checkBox()">
                 </td>
             <tr>
               <th class="t1head">Sintesi</th>
