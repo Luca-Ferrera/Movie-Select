@@ -37,6 +37,7 @@ function selezFilm(){
     var titolo,titolo_img;
     console.log("join selez film");
     window.pagina="Tutti";
+    $("#sbarinput").attr("placeholder", "Ricerca per titolo");
     $("#contenitore").empty();
     /*$("#contenitore").append("<div id='barinfo'>Ricerca un film per titolo nella searchbar a lato</div>"<hr class='halfhr'></hr>");*/
     $("#contenitore").append('<div class="group_name" id="tutti-group"></div>');
@@ -64,7 +65,7 @@ function sort_film(film1,film2){
   return 0;
 }
 
-function mostraFilm(){$(".filmimg").click(function (){
+function mostraFilm(){$(".filmimg").click(function (event){
         console.log(this);
         var film;
         var film_titolo=$(this).attr("name");
@@ -92,7 +93,13 @@ function mostraFilm(){$(".filmimg").click(function (){
         $("#filmdescr").css("border-color","red");
         /*$("#filmdescr").css("position","fixed");*/
         console.log("scroll");
-        window.scrollTo("#filmdescr");
+        /*window.scrollTo("#filmdescr");*/
+        event.preventDefault();
+        console.log($("#desc"));
+        
+        $('html, body').animate({
+          scrollTop: $("#line")
+        }, 800);                
       });
   }
 
