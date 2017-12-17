@@ -75,21 +75,21 @@ function mostraFilm(){$(".filmimg").click(function (event){
         $("#filmdescr").empty();
         $("#filmdescr").append('<img src='+film.img+'>');
         $("#filmdescr").append('<h2 class="group_name" id="descr_title">'+film.titolo+'<h2>');
-        $("#filmdescr").append('<div id="descr_anno">'+film.anno+'</div>');
-        $("#filmdescr").append('<div id="descr_attori>">');
+        $("#filmdescr").append('<div id="descr_anno"><span class="attr_descr">Anno di uscita</span>: '+film.anno+'</div>');
+        $("#filmdescr").append('<div id="descr_attori>"><span class="attr_descr">Attori:</span><br>');
         for (i in film.attori)
             $("#filmdescr").append('-'+film.attori[i]);
         $("#filmdescr").append('</div>');
-        $("#filmdescr").append('<div id="descr_genere">');
+        $("#filmdescr").append('<div id="descr_genere"><span class="attr_descr">Genere:</span><br>');
         for (j in film.genere)
             $("#filmdescr").append('-'+film.genere[j]);
         $("#filmdescr").append('</div>');
-        $("#filmdescr").append('<div id="descr_descr">'+film.descrizione+'</div>');
-        $("#filmdescr").css("border-color","red");
+        $("#filmdescr").append('<div id="descr_descr"><span class="attr_descr">Trama breve:</span><br>'+film.descrizione+'</div>');
+        //$("#filmdescr").css("border-color","red");
         console.log("scroll");
         event.preventDefault();
         console.log($("#desc"));
-        $('html, body').animate({scrollTop: $("#filmdescr")}, 800);                
+        $('html, body').animate({scrollTop: $("#filmdescr")}, 800);
       });
   }
 
