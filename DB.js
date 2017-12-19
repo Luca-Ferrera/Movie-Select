@@ -11,7 +11,7 @@ window.pagina="Tutti";
 function carica(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = gestisciResponse;
-    xhttp.open("GET","filmlist.txt",true);
+    xhttp.open("GET","filmlist.json",true);
     xhttp.send();
 }
 
