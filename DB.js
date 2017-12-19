@@ -48,7 +48,7 @@ function selezFilm(){
       if (titolo.toLowerCase().indexOf(testo_ricerca.toLowerCase())!=-1 || testo_ricerca==""){
         console.log("Passa il controllo 1");
         $("#tutti-ul").append('<li id="'+titolo+'-li-item"></li>');
-        $("#"+titolo+"-li-item").append('<img class="filmimg" name='+titolo_img+' src='+filmografia[film].img+'>');
+        $("#"+titolo+"-li-item").append('<a id="link-"'+titolo+' href="#desc"><img class="filmimg" name='+titolo_img+' src='+filmografia[film].img+'></a>');
         console.log("debug");
       }
     }
@@ -85,11 +85,6 @@ function mostraFilm(){$(".filmimg").click(function (event){
             $("#filmdescr").append('-'+film.genere[j]);
         $("#filmdescr").append('</div>');
         $("#filmdescr").append('<div id="descr_descr"><span class="attr_descr">Trama breve:</span><br>'+film.descrizione+'</div>');
-        //$("#filmdescr").css("border-color","red");
-        console.log("scroll");
-        event.preventDefault();
-        console.log($("#desc"));
-        $('html, body').animate({scrollTop: $("#filmdescr")}, 800);
       });
   }
 
@@ -160,7 +155,7 @@ $(document).ready(function(){
           for(el in window.actors[attore]){
             $("#"+attorerepl+"-ul").append('<li id="'+ el + attorerepl +'-li-item"></li>');
             var titolo= window.actors[attore][el].titolo.replace(/ /g,"_");
-            $("#"+el+attorerepl+"-li-item").append('<img class="filmimg" name='+titolo+' src='+window.actors[attore][el].img+'>');
+            $("#"+el+attorerepl+"-li-item").append('<a id="link-"'+titolo+' href="#desc"><img class="filmimg" name='+titolo+' src='+window.actors[attore][el].img+'></a>');
           }
         }
       }
@@ -197,13 +192,12 @@ $(document).ready(function(){
           for(el in window.generi[genere]){
             $("#"+genere+"-ul").append('<li id="'+ el + genere +'-li-item"></li>');
             var titolo= window.generi[genere][el].titolo.replace(/ /g,"_");
-            $("#"+el+genere+"-li-item").append('<img class="filmimg" name='+titolo+' src='+window.generi[genere][el].img+'>');
+            $("#"+el+genere+"-li-item").append('<a id="link-"'+titolo+' href="#desc"><img class="filmimg" name='+titolo+' src='+window.generi[genere][el].img+'></a>');
           }
         }
       }
       mostraFilm();
     }
-
 
     $('#tutti').click(function(){
       testo_ricerca="";
@@ -222,6 +216,14 @@ $(document).ready(function(){
         selezGeneri();
       if(window.pagina=="Tutti")
         selezFilm();
+    });
+    //function to scroll to film description when click on film img
+    $(document).on('click', 'a[href^="#"]', function (event) {
+      event.preventDefault();
+  
+      $('html, body').animate({
+          scrollTop: $($.attr(this, 'href')).offset().top
+      }, 500);
     });
 
 });
